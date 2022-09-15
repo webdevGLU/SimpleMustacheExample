@@ -1,7 +1,15 @@
 <?php
+//use composer packages
 require __DIR__ . '/vendor/autoload.php';
-$rawJSONData = file_get_contents('https://annexbios.nickvz.nl/api/');
+
+//load jsonData
+$rawJSONData = file_get_contents('data.json');//https://annexbios.nickvz.nl/api/
 $jsonData = json_decode($rawJSONData, true);
+
+//instance mustache
+$mustache = new Mustache_Engine(array('entity_flags' => ENT_QUOTES, 'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates')));
+//load mustache template
+$movieBlockTemplate = $mustache->loadTemplate('movieBlock');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,25 +24,11 @@ $jsonData = json_decode($rawJSONData, true);
 
 <body>
   <?php
-  $template = '<div class="grid_item">
-<img src="{{film_photo}}" width="100">
-<h4>{{film_title}}</h4>
-<ion-icon name="star"></ion-icon>
-<ion-icon name="star"></ion-icon>
-<ion-icon name="star"></ion-icon>
-<ion-icon name="star-half"></ion-icon>
-<ion-icon name="star-outline"></ion-icon><br>
-<h5>Release {{film_releasedate}}</h5><br>
-{{film_shortinfo}}
-<br>
-  <button>button</button>
-</div>';
-
   for ($i = 0; $i < count($jsonData["filmdata"]); $i++) {
-    //echo($jsonData["filmdata"][$i]["film_title"]);
-    $m = new Mustache_Engine(array('entity_flags' => ENT_QUOTES));
-    echo $m->render($template, $jsonData["filmdata"][$i]);
+    //render mustache template and insert data from jsonData
+    echo $movieBlockTemplate->render($jsonData["filmdata"][$i]);
   }
   ?>
 </body>
+
 </html>
