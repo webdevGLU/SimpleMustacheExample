@@ -6,7 +6,7 @@ $rawJSONData = file_get_contents('data.json'); //data.json from https://annexbio
 $jsonData = json_decode($rawJSONData, true);
 //instance mustache
 $mustache = new Mustache_Engine(array('entity_flags' => ENT_QUOTES, 'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates')));
-//load mustache template
+//load mustache templates
 $movieBlockTemplate = $mustache->loadTemplate('movieBlock');
 $htmlTemplate = $mustache->loadTemplate('html');
 //create $htmlData
