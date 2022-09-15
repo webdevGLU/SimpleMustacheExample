@@ -1,0 +1,33 @@
+.grid_item {
+    z-index: 2;
+    text-align: center;
+    background-color: #fff;
+    padding-bottom: 5%;
+    width:100px;
+    display: inline-block;
+  }
+  .grid_item img {
+    width: 100%;
+  }
+  .grid_item h4 {
+    font-size: 15px;
+  }
+  .grid_item ion-icon {
+    font-size: 10px;
+  }
+  .grid_item h5 {
+    font-size: 10px;
+  }
+  .grid_item p {
+    font-size: 10px;
+  }
+  .grid_item button {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #8b9e51;
+    color: #fff;
+    border: none;
+  }
+  .grid_item button:hover {
+    cursor: pointer;
+  }
